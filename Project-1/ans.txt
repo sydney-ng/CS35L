@@ -1,0 +1,49 @@
+Week 1: Laboratory
+
+1-Answer: To get man to print all the commands that have a specific word on their man page, you type “man -k <SPECIFIC WORD>”.  
+1-How I Found it: I used the hint man man and used the handout Zhou gave us from Tuesday’s discussion.  
+
+2-Answer: cp is located in /user/local/cs/bin/cp. wc is located in /user/local/cs/bin/wc.
+2-How I Found it: you use the “which cp” and “which wc” command that we learned in discussion. 
+
+3-Answer: w shows what user is logged on and their activity, x gives you the network transparent window system. 
+3-How I found it: These can be found in the man pages. 
+
+4-Answer: When you execute the command named by the symbolic link /user/bin/emacs, you are executing /etc/alternatives/emacs. 
+4-How I Found it: I used the command ls -l -k "emacs”. 
+
+5-Answer: ‘g+s’ allows you to give the individual who executes the file the permissions for that group. ‘o-x’ will remove the permissions of an individual for execution. 
+5-How I Found it: I looked up man chmod. 
+
+6-Answer: If you want to search for files that have been modified in the past 3 weeks, you use ’-mtime 20’ as he number after -mtime specifies the number of 24-hour periods, rounded up. That is why it is 20 and not 21 even though it is 3 weeks. 
+6-How I Found it: I looked up man find. 
+
+7-Answer: ‘find / -type d -mtime 20’ allows you to find all directories modified in the last 3 weeks. -type d specifies that it’s a directory and -mtime 20 refers to the 3 week period. There are a large number of directories that have been modified in the past 3 weeks. 
+
+8-Answer: 350 of the files are symbolic links. 
+8-How I Found it: I used find /type -l | wc 
+
+9-Answer: The oldest regular file in /usr/lib is libgamin-1.so.0.1.10. 
+9-How I Found it: The command you use to find the oldest file in /usr/lib is cd /usr/lib && ls -lt
+
+10-Answer: locale gets it’s commands from ‘LC_ environment variables’ 
+10-How I Found it: I got it from the man page for locale. 
+
+11-Answer: In Emacs, the commands that have sort in their name are ‘Buffer-menu-sort’, ‘sort-columns’, ‘sort-fields’, ‘sort-lines’, ‘sort-numeric-fields’, ‘sort-ages’, ‘sort-paragraphs’, ‘sort-regex-fields’, ‘tabulated-list-col-sort’, and ‘tabulated-list-sort’. 
+11-How I Found it: The C-h a sort command will allow you to find keywords.
+
+12-Answer: C-M-a moves to the beginning of a dfun, C-M-b moves backwards across a balanced expression, C-M-c exits recursive editing, C-M-d moves forward by one level from the parentheses, C-M-e moves forward to the end of the next defun, C-M-e moves to the end of the next defun, C-M-f moves forward over the next balanced expression, C-M-g is not a command, and C-M-h will grab the entire defun from beginning to end. 
+12-How I Found it: You can use C-h k <KEYWORD> 
+
+13-Answer: C-g will cancel the command you’re using. 
+13-How I Found it: You use the key bindings. 
+
+14-Answer: yank will put back the text you had killed.  
+14-How I Found it: I looked up C-h f yank 
+
+15-Answer: ls -l will give you the files with their permissions, but ls -la will also give you hidden files.
+15-How I Found it: I ran these commands 
+
+
+
+
