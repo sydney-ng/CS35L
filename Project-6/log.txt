@@ -1,0 +1,43 @@
+1. First you want to run the command, sort --version.
+ This will give you the following output:
+sort (GNU coreutils) 8.4
+Copyright (C) 2010 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Written by Mike Haertel and Paul Eggert.
+2. Create a file with 10,000,000 single-precision floating point numbers.
+To do this, use the command od -An -t f -N 40000000 <dev/urandom | tr -s ' ' '\n' > test.txt.
+od: dumps files in octal
+-An: don't write offset base
+-t: specifies the type
+f: floating point (goes with type)
+-N: tells you the number (goes with 1000000)
+4000000: size of the file, in terms of bytes
+dev/null: where to put the extraneous error stuff
+tr -s ' ' '\n': turn ' ' into '\n'
+> test.txt: put this output into test.txt
+3.  export PATH=/usr/local/cs/bin:$PATH will allow you to change your path
+environment variable.
+4. time -p sort -g test.txt > /dev/null is used to time.
+The following is the output:
+real 19.17
+user 18.78
+sys 0.03 
+4. Then you want to use --parallel so you use:
+   a. time -p sort -g --parallel=1 test.txt > /dev/null
+        real 91.00
+        user 90.85 
+        sys 0.14 
+   b. time -p sort -g --parallel=2 test.txt > /dev/null
+        real 48.01
+        user 91.37
+        sys 0.18
+   c. time -p sort -g --parallel=4 test.txt > /dev/null 
+        real 27.42
+        user 93.31 
+        sys 0.22
+   d. time -p sort -g --parallel=8 test.txt > /dev/null 
+        real 17.98
+        user 95.37
+        sys 0.26

@@ -1,0 +1,48 @@
+-#   include <sys/time.h>
+-#  else
+-#   include <time.h>
+-#  endif
+-# endif
+-
+-# if ! HAVE_STRUCT_TIMESPEC
+-/* Some systems don't define this struct, e.g., AIX 4.1, Ultrix 4.3.  */
+-struct timespec
+-{
+-  time_t tv_sec;
+-  long tv_nsec;
+-};
+-# endif
+-
+-/* Return negative, zero, positive if A < B, A == B, A > B, respectively.
+-   Assume the nanosecond components are in range, or close to it.  */
+-static inline int
+ timespec_cmp (struct timespec a, struct timespec b)
+ {
+-  int diff = a.tv_sec - b.tv_sec;
+-  return diff ? diff : a.tv_nsec - b.tv_nsec;
++  if (a.tv_sec < b.tv_sec) 
++  {
++     return -1;
++  }
++
++  else if (b.tv_sec < a.tv_sec)
++  {
++      return 1;
++  }
++  else if (b.tv_sec == a.tv_sec) 
++  {
++      return 0;
++  }
+ }
+-
+-# if ! HAVE_DECL_NANOSLEEP
+-/* Don't specify a prototype here.  Some systems (e.g., OSF) declare
+-   nanosleep with a conflicting one (const-less first parameter).  */
+-int nanosleep ();
+-# endif
+-
+-void gettime (struct timespec *);
+-int settime (struct timespec const *);
+-
+-#endif
+                             

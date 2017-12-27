@@ -1,0 +1,15 @@
+Q1: You have to change it because originally it is in %Y-%m-%d %H:%M format. However, you want it in the date Month date year. Instead, you turn it into locale_format into LC_TIME (the default one). 
+Q2: If the company adopt this version of Coreutils, then you need to make sure that the patch does not interfere with other dependencies in other libraries. Also, this could introduce problems with the application if the users do not speak English. For example, it may say Mar  2  2009, as in the example. However, if your users don’t know what ‘Mar’ is, they could get confused. 
+Q3: When you do ./randline /dev/null, the error message you get is below.   
+Traceback (most recent call last):
+  File "./randline", line 70, in <module>
+    main()
+  File "./randline", line 64, in main
+    sys.stdout.write(generator.chooseline())
+  File "./randline", line 34, in chooseline
+    return random.choice(self.lines)
+  File "/usr/lib64/python2.6/random.py", line 261, in choice
+    return seq[int(self.random() * len(seq))]  # raises IndexError if seq is empty
+IndexError: list index out of range
+You get this error message because it says ‘list index out of range’. You are trying to access something that is not there. You’re trying to access a value that is undefined. 
+Q4: You will be told that there are syntax errors if you run it with Python 3 and not Python 2. This is because there are subtle differences in syntax between the syntaxes. 

@@ -1,0 +1,95 @@
+Laboratory:
+1) Changing the sandard of locale to standard C: export LC_ALL='C'
+2) Move words from /usr/share/dict/words to my working directory:
+ cp /usr/share/dict/words /u/eng/class/classyng/Desktop/
+Laboratory/Week2/Assignment2
+3)Sort words and then put it in a text file: sort words -o words2.txt
+4) tr -c 'A-Za-z' '[\n*]' < assign2.html: This will give you the
+ subset of the document that is the complement of 'A-Za-z',
+ which means that it will print the lines with upper and lowercase 
+letters. If it isn't a word with letters, it will print a white
+ line to the console. 
+5) tr -cs 'A-Za-z' '[\n*]' < assign2.html: This will parse through the
+ document and give you a string of the words until it sees a character that 
+isn't a letter. Then it will enter a newline character and print the next
+ instance on the next line. 
+6) tr -cs 'A-Za-z' '[\n*]' | sort < assign2.html: This will sort the document 
+by line alphabetically. It starts with blank spaces and then makes its way
+ from the beginning to the end of the alphabet.
+7) tr -cs 'A-Za-z' '[\n*]' | sort -u < assign2.html: This basically does the
+ same thing as the one above. However, sort -u will only grab
+ the unique lines (so no repetition)
+8) tr -cs 'A-Za-z' '[\n*]' < assign2.html | sort -u | comm - words: This will
+ take in the 2 files and give you 3 columns. The first column gives you the
+ lines unique to assign2.html, 
+the second gives you lines unique to words, and the 
+third gives you lines that are in both files.  
+9) tr -cs 'A-Za-z' '[\n*]' < assign2.html
+ | sort -u | comm -23 - words2: This will take
+ in only the 2nd and 3rd colums from the answer above. 
+Hawaiian Dictionary
+1. wget http://mauimapp.com/moolelo/hwnwdseng.htm:
+ fetch the content for hawaiian dictionary.
+2.  Remove content to spec's directions:
+ all_words=$(grep -E '<tr>|<td>' original.html |
+sed '/<tr>/,/<\/td>/d' |
+sed -e 's@<u>@@g' -e 's@</u>@@g' |
+sed -e "s@\`@\'@g" |
+sed -e 's/,//g' |
+tr '[:upper:]' '[:lower:]' |
+sed -e 's@<td>@@g' -e 's@</td>@@g' |
+tr -d '[:blank:]' |
+sed '/[pk1mnwlhaeiou]/d' |
+sort -u)
+3. To populate hwords: hwnwdseng.htm | ./buildwords.sh > hwords
+4. To check hwords on itself use: tr -cs 'A-Za-z'
+ '[\n*]' < hwords | sort -u | comm - hwords .
+ It was correct and everything is in the 3rd column 
+5. To check the assignment page: tr -cs 'A-Za-z' '[\n*]'
+ < assign2.html | sort -u | comm -23
+ - hwords > checkAssignment and then used wc -w
+ checkAssignment to get 452 misspelled words. 
+6. To get words that are wrong in english 
+but not hawaiian: cat checkAssignment |  tr -cs 
+"pk\'mnwlhaeiou" '[\n*]' |  sort -u | comm -12 - hwords > mispelledEng
+7. To get words wrong in hawaiian but not english: cat
+ checkAssignment | tr -cs 'A-Za-z' '[\n*]'
+ | sort -u | comm -12 - words > Check2
+8) tr -cs 'A-Za-z' '[\n*]' < assign2.html | sort -u | comm - words: This
+ will take in the 2 files and give you 3 columns. The first column gives you
+ the lines unique to assign2.html, the second gives you lines unique to words,
+and the third gives you lines that are in both files.
+9) tr -cs 'A-Za-z' '[\n*]' < assign2.html | sort -u | comm -23 - words2: This
+will take in only the 2nd and 3rd colums from the answer above.
+Hawaaian Dictionary:
+1. wget http://mauimapp.com/moolelo/hwnwdseng.htm: fetch the content for
+hawaiian dictionary.
+2.  Remove content to spec's directions:
+ all_words=$(grep -E '<tr>|<td>' original.html |
+sed '/<tr>/,/<\/td>/d' |
+sed -e 's@<u>@@g' -e 's@</u>@@g' |
+sed -e "s@\`@\'@g" |
+sed -e 's/,//g' |
+tr '[:upper:]' '[:lower:]' |
+sed -e 's@<td>@@g' -e 's@</td>@@g' |
+tr -d '[:blank:]' |
+sed '/[pk1mnwlhaeiou]/d' |
+sort -u)
+3. To populate hwords: hwnwdseng.htm | ./buildwords.sh > hwords
+4. To check hwords on itself use: tr -cs 'A-Za-z' '[\n*]' < hwords
+| sort -u | comm - hwords . It was correct and everything is in the 3rd column
+5. To check the assignment page: tr -cs 'A-Za-z' '[\n*]' < assign2.html |
+sort -u | comm -23 - hwords > checkAssignment and then used wc -w
+ checkAssignment to get 452 misspelled words.
+6. To get words that are wrong in english but not hawaiian: cat checkAssignment
+|  tr -cs "pk\'mnwlhaeiou" '[\n*]' |  sort -u | comm -12 - hwords > mispelledEng
+the file would include words like:
+oe
+pa
+po
+ua
+7. To get words wrong in hawaiian but not english: cat checkAssignment | tr
+-cs 'A-Za-z' '[\n*]' | sort -u | comm -12 - words > Check2
+the file would include words like:
+a
+ail

@@ -1,0 +1,27 @@
+1. In file included from utimecmp.c:41:
+utimens.h:2: error: conflicting types for 'futimens'
+/usr/include/sys/stat.h:374: note: previous declaration of 'futimens' was here
+make[2]: *** [utimecmp.o] Error 1
+make[2]: Leaving directory `/w/home.08/class/classyng/Desktop/Laboratory/Week4/CoreUtils_Stable/coreutils-with-bug/lib'
+make[1]: *** [install] Error 2
+make[1]: Leaving directory `/w/home.08/class/classyng/Desktop/Laboratory/Week4/CoreUtils_Stable/coreutils-with-bug/lib'
+make: *** [install-recursive] Error 1
+2. Apply the patch:  patch -p0 < ../../coreutils.diff 
+3. ./configure --prefix=/u/eng/class/classyng/Desktop/Laboratory/Week4/CoreUtils_Stable/coreutils-with-bug
+4. touch -d '1918-11-11 11:00' temp.c and ls -lt
+5. gdb ls: the way to access that executable in src (otherwise 
+you would be pulling it from the bin, which you can't do) 
+6. You then want to run gdb to see where the logic error is. 
+You want to look at files that pertain to time. In particular,
+ when you go into compare m_time with gdb, you can see that
+ the function timespec_cmp is subtracting to get the time. 
+Instead, you should have the function return -1, 0, or 1 --
+ a foolproof way to ensure that you are getting a valid 
+response each time. 
+7. We then edit the function and then save it as a patch
+ file called timespecPATCH.h. Then apply the patch the 
+same way we did above, but change the diff file name from 
+coreutils.diff to lab4.diff. 
+8. When you reproduce the problem in your directory in 
+SEASnet Linux servers and you try to test it, the problem
+ is not fixed. The original problem continues to persist with the wrong date order.   
