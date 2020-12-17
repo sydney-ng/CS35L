@@ -25,7 +25,7 @@ directory editing, running shell commands, building programs, and Emacs Lisp.
 ## Project 2: Files and Editing
 This project covers unix wildcards, basic regular expressions, more advanced commands (e.g., grep, find), pipelines and redirection, simple shell scripting, and interpreted languages
 
-## **Project 3: Commands and Basic Scripting
+## Project 3: Commands and Basic Scripting
 This project covers the basics of Python, Java as a compromise between interpreted and compiled languages, and how to build our source code using `make`, `automake`, and `autoconf`. 
 
 ## Project 4: Change Management Basics
